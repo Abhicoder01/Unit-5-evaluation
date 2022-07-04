@@ -1,0 +1,169 @@
+
+mysql> create database c2;
+Query OK, 1 row affected (0.23 sec)
+
+mysql> use c2 database;
+Database changed
+
+mysql> create table person(personid int primary key,lastname varchar(12),firstname varchar(12));
+Query OK, 0 rows affected (1.61 sec)
+
+
+mysql> insert into person values(1,"wang","allen");
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into person values(2,"alice","bob");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> create table Address(addressid int primary key,personid int,city varchar(12),state varchar(12));
+Query OK, 0 rows affected (0.50 sec)
+
+mysql> insert into Address values(1,2,"NewYork city","NewYork");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into Address values(2,3,"San Diego","California");
+Query OK, 1 row affected (0.09 sec)
+
+
+
+mysql> select firstname,lastname,city,state from person join Address where person.personid=Address.addressid;
++-----------+----------+--------------+------------+
+| firstname | lastname | city         | state      |
++-----------+----------+--------------+------------+
+| allen     | wang     | NewYork city | NewYork    |
+| bob       | alice    | San Diego    | California |
++-----------+----------+--------------+------------+
+2 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+Answer2:
+
+Transcation:
+Transactions in Java, is the series of actions that must all complete successfully. Hence, if one or more action fails, all other actions must
+back out leaving the state of the application unchanged. This is necessary to ensure that the integrity of the application state is never compromised.
+
+
+
+1.Acid in database
+the process of transcation from start to end with the envolvent of some function is called acid
+1.the entire transcation takes at one.
+2.the databse must be consistent before and after the transcation.
+3.Multiple transcation occurs independently
+4.sucessfull transcation even if system fail.
+
+example
+x=500
+y=200
+z=x-y.
+z=300;
+
+
+x=500
+x=500-400
+x=100
+
+
+Answer 3:
+create cocoaconfection database;
+
+CREATE TABLE customer (
+customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+first_name VARCHAR(255) NOT NULL,
+last_name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+address VARCHAR(255) DEFAULT NULL,
+city VARCHAR(255) DEFAULT NULL,
+state VARCHAR(2) DEFAULT NULL,
+zip_code VARCHAR(5) DEFAULT NULL
+);
+
+insert into customer values(*,*,*,*,*,*,*,*);
+insert into customer values(*,*,*,*,*,*,*,*);
+insert into customer values(*,*,*,*,*,*,*,*);
+insert into customer values(*,*,*,*,*,*,*,*);
+insert into customer values(*,*,*,*,*,*,*,*);
+insert into customer values(*,*,*,*,*,*,*,*);
+
+
+CREATE TABLE orders (
+order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+customer_id INT NOT NULL,
+order_placed_date DATE NOT NULL,
+FOREIGN KEY (customer_id) REFERENCES customers
+(customer_id)
+);
+
+insert into orders values(*,*,*);
+insert into orders values(*,*,*);
+insert into orders values(*,*,*);
+insert into orders values(*,*,*);
+insert into orders values(*,*,*);
+insert into orders values(*,*,*);
+
+SELECT s.email AS customer_email,
+FROM customer AS s
+INNER JOIN orders AS a ON s.customer_id = a.customer_id;
+
+
+select count(*) from orders where order_placed_data>=01/01/2016;
+
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use cocoaconfection databse;
+ERROR 1049 (42000): Unknown database 'cocoaconfection'
+mysql> use cocoaconfections databse;
+Database changed
+mysql> select * from customers;
++-------------+------------+-----------+----------------+---------+-----------+-------+----------+
+| customer_id | first_name | last_name | email          | address | city      | state | zip_code |
++-------------+------------+-----------+----------------+---------+-----------+-------+----------+
+|           1 | Abhi       | Sharma    | abhi11@masai   | delhi   | new_delhi | dl    | 11005    |
+|           2 | chaman     | Sharma    | chaman11@masai | delhi   | new_delhi | dl    | 11005    |
+|           3 | yaman      | Sharma    | yaman11@masai  | mumbai  | mumbai    | mb    | 11327    |
++-------------+------------+-----------+----------------+---------+-----------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from order;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order' at line 1
+mysql> select * from orders;
++----------+-------------+-------------------+
+| order_id | customer_id | order_placed_date |
++----------+-------------+-------------------+
+|     1124 |           2 | 2016-01-04        |
+|     1125 |           2 | 2017-01-04        |
+|     1126 |           1 | 2016-03-04        |
+|     1128 |           3 | 2016-03-07        |
+|     1129 |           1 | 2016-03-08        |
++----------+-------------+-------------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(*) from orders where order_placed-date>=01/01/2016;
+ERROR 1054 (42S22): Unknown column 'order_placed' in 'where clause'
+mysql> select count(*) from orders where order_placed_date>=01/01/2016;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+y=400
+y=400-200
+y=200.
